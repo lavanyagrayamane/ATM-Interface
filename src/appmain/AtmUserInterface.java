@@ -51,23 +51,23 @@ public class AtmUserInterface {
 					mobileno=sn.next();
 					System.out.println("Enter the username:");
 					username=sn.next();
-					boolean valid=AtmLoginDetailsDaoImpl.isValidUsername(username);
+					/*boolean valid=AtmLoginDetailsDaoImpl.isValidUsername(username);
 				   while(valid==false)
 				     {
 				    	System.out.println("Username is not valid please enter the valid Username!!");
 				    	  username=sn.next();
 				    	  valid=AtmLoginDetailsDaoImpl.isValidUsername(username);
-				   }
+				   }*/
 			
 				   System.out.println("Enter the password:");
 					password=sn.next();
-					boolean validpwd=AtmLoginDetailsDaoImpl.isValidPwd(password);
+					/*boolean validpwd=AtmLoginDetailsDaoImpl.isValidPwd(password);
 					while(validpwd==false)
 				     {
 				    	System.out.println("Password is not valid please Enter the valid Password!!");
 				    	  password=sn.next();
 				    	  validpwd=AtmLoginDetailsDaoImpl.isValidPwd(password);
-				   }
+				   }*/
 					System.out.println("Enter the role:");
 					role=sn.next();
 					AtmUserDetails user=new AtmUserDetails();
@@ -78,10 +78,16 @@ public class AtmUserInterface {
 					user.setUsername(username);
 					user.setPassword(password);
 					user.setRole(role);
-				    LoginDao.signUp(user);
+				     boolean valid = LoginDao.signUp(user);
+				     if(valid==true)
+				     {
 				    System.out.println("You have successfully sign up");
 				    System.out.println("If you want to do transaction please signIn!!");
-				    	
+				     }
+				     else
+				     {
+				    	 System.out.println("Please enter the correct username or password");
+				     }
                   break;
 				case 2: 
 					System.out.println("Enter the username");

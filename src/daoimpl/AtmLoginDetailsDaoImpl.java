@@ -29,8 +29,18 @@ public class AtmLoginDetailsDaoImpl implements AtmLoginDetailsDao{
 	public boolean signUp(AtmUserDetails user) {
 		// TODO Auto-generated method stub
 		
+		String username = user.getUsername();
+		String password = user.getPassword();
+		boolean vuser = isValidUsername(username);
+		boolean vpass = isValidPwd(password);
+		
 		try {
+			if(vuser == true && vpass == true)
+			{
 			return loginDetailsDaoRes.signUp(user);
+			}
+			else
+				return false;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("problem in sign up"+e.getMessage());
@@ -55,7 +65,7 @@ public class AtmLoginDetailsDaoImpl implements AtmLoginDetailsDao{
 	
     public static boolean isValidUsername(String name)
     {
-    	String regex = "^(.+)@(.+)$";
+    	String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
     	Pattern p=Pattern.compile(regex);
     	if(name==null){
 		return false;
